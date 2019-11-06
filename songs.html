@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+		body{
+			text-align: center;	
+		}
+	</style>
+</head>
+
+<body>
+
+<h2>CS Rules: the Cover Band</h2>
+
+
+<p id ="serialize"></p>
+
+<form>
+	<select id = "genreselect">
+  		<option value="All">All</option>
+  		<option value="Pop">Pop</option>
+  		<option value="Rap">Rap</option>
+  		<option value="Country">Country</option>
+	</select>
+	<button type ="button" onclick="changedisplay()">Display</button>
+</form>
+
+<p id="display"></p>
+
+<script>
+var setlistJSON = {"songs":[{"name": "Better", "artist": "Khalid", "genre": "Pop", "year": "2018" },{"name": "California Gurls", "artist": "Katy Perry / Snoop Dogg", "genre": "Pop", "year": "2010" },{"name": "Replay", "artist": "Iyaz", "genre": "Pop", "year": "2010" },{"name": "Dynamite", "artist": "Taio Cruz", "genre": "Pop", "year": "2009" },{"name": "Sixteen", "artist": "Thomas Rhett", "genre": "Country", "year": "2017" },{"name": "Chicken Fried", "artist": "Zac Brown Band", "genre": "Country", "year": "2008" },{"name": "Toes", "artist": "Zac Brown Band", "genre": "Country", "year": "2008" },{"name": "Sicko Mode", "artist": "Travis Scott", "genre": "Rap", "year": "2018" },{"name": "Hotline Bling", "artist": "Drake", "genre": "Rap", "year": "2016" },{"name": "Bank Account", "artist": "21 Savage", "genre": "Rap", "year": "2017" }]};
+var serialize = JSON.stringify(setlistJSON);
+document.getElementById("serialize").innerHTML = serialize;
+
+var setlist = JSON.parse(serialize);
+var output= "";
+var length = setlist.songs.length;
+
+for (var x = 0; x < length; x++){
+	output += setlist.songs[x].name + "<br>" +
+			setlist.songs[x].artist + "<br>" +
+			setlist.songs[x].genre + "<br>" +
+			setlist.songs[x].year + "<br>" + "<br>";
+}
+
+document.getElementById("display").innerHTML = output;
+</script>
+
+<script>
+function changedisplay(){
+	var newoutput = "";
+	var genre = document.getElementById("genreselect").value;
+
+	if (genre == "All"){
+		for (var x = 0; x < length; x++){
+			newoutput += setlist.songs[x].name + "<br>" +
+			setlist.songs[x].artist + "<br>" +
+			setlist.songs[x].genre + "<br>" +
+			setlist.songs[x].year + "<br>" + "<br>";
+		}
+	}
+	else{
+		for (var x = 0; x < length; x++){
+			if (setlist.songs[x].genre == genre){
+				newoutput += setlist.songs[x].name + "<br>" +
+				setlist.songs[x].artist + "<br>" +
+				setlist.songs[x].genre + "<br>" +
+				setlist.songs[x].year + "<br>" + "<br>";
+			}
+		}
+	}
+	document.getElementById("display").innerHTML = newoutput;
+}
+</script>
+
+</body>
+</html>
